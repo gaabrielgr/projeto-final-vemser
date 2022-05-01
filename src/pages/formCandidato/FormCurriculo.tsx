@@ -84,32 +84,31 @@ function FormCurriculo() {
     const NewsValues = CloneExperiencia(values);
     prepareDataToInsert(NewsValues);
     console.log("newvalues no post, antes de enviar ", NewsValues);
-    if (NewsValues.dadosEscolares?.length) {
-      try {
-        const { data } = await api.post("/candidato-completo", NewsValues);
-        console.log("data ", data);
-        if (fileInputData && data) {
-          PostIn(data.idCandidato);
-        }
-        Notiflix.Notify.success("Candidato Cadastrado com sucesso");
-        navigate("/curriculos");
-      } catch (error: any) {
-        if (error.response.data.errors) {
-          switch (error.response.data.errors[0]) {
-            case "numero: deve ser maior que 0":
-              Notiflix.Notify.warning("Numero da casa deve ser maior que 0");
-              break;
 
-            case "cpf: número do registro de contribuinte individual brasileiro (CPF) inválido":
-              Notiflix.Notify.warning("CPF inválido");
-              break;
-          }
-        }
-        if (error.response.data.message === "CPF já cadastrado") {
-          Notiflix.Notify.warning(error.response.data.message);
-        }
-        console.log(error.response.data);
+    try {
+      const { data } = await api.post("/candidato-completo", NewsValues);
+      console.log("data ", data);
+      if (fileInputData && data) {
+        PostIn(data.idCandidato);
       }
+      Notiflix.Notify.success("Candidato Cadastrado com sucesso");
+      navigate("/curriculos");
+    } catch (error: any) {
+      if (error.response.data.errors) {
+        switch (error.response.data.errors[0]) {
+          case "numero: deve ser maior que 0":
+            Notiflix.Notify.warning("Numero da casa deve ser maior que 0");
+            break;
+
+          case "cpf: número do registro de contribuinte individual brasileiro (CPF) inválido":
+            Notiflix.Notify.warning("CPF inválido");
+            break;
+        }
+      }
+      if (error.response.data.message === "CPF já cadastrado") {
+        Notiflix.Notify.warning(error.response.data.message);
+      }
+      console.log(error.response.data);
     }
   }
 
