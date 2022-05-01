@@ -22,12 +22,8 @@ type PropsMap = {
 };
 
 const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
-  console.log(candidato);
-
   const { experiencias, dadosEscolares, idCandidato } = candidato;
-
   const navigate = useNavigate();
-
   function NavigateById(id: number) {
     navigate(`/form-curriculo/${id}`);
   }

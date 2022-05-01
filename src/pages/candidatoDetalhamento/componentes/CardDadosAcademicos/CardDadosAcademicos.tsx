@@ -13,8 +13,6 @@ type Props = {
   };
 };
 const CardDadosAcademicos = ({ dadosEscolares }: PropsDados) => {
-  console.log(dadosEscolares);
-
   return (
     <GC.DivTopicosCandidato>
       <GC.TituloInfo>

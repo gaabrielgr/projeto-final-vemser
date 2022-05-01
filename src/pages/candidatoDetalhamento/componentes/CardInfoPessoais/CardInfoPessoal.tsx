@@ -42,7 +42,6 @@ const CardInfoPessoal = (candidato: Props) => {
   useEffect(() => {
     GetCurriculo(false);
   }, []);
-  console.log("isErro =>>>>>>>", isBoolean);
   if (isLoading) {
     return <Loading altura="62vh" largura="33.53vw" />;
   }

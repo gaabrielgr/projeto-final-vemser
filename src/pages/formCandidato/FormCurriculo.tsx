@@ -79,15 +79,10 @@ function FormCurriculo() {
     return NewData;
   }
   async function postCandidato(values: CandidatoDTO) {
-    console.log("values no post ", values);
-
     const NewsValues = CloneExperiencia(values);
     prepareDataToInsert(NewsValues);
-    console.log("newvalues no post, antes de enviar ", NewsValues);
-
     try {
       const { data } = await api.post("/candidato-completo", NewsValues);
-      console.log("data ", data);
       if (fileInputData && data) {
         PostIn(data.idCandidato);
       }
@@ -129,7 +124,6 @@ function FormCurriculo() {
       const { data } = await api.get(
         `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
       );
-
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
         setCandidatoForUpdate(prepareDateToUser(props))
