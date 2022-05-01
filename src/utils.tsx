@@ -10,7 +10,7 @@ export const zeroLeft = (num: number) => {
 export const formatDateToApi = (value: string | undefined) => {
   return moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
 };
-export const formatDateToUser = (value:  string | undefined) => {
+export const formatDateToUser = (value: string | undefined) => {
   return moment(value, "YYYY-MM-DD").format("DD/MM/YYYY");
 };
 export const BottomPage = () => {
@@ -113,18 +113,21 @@ export const SingupSchema = Yup.object().shape({
 });
 
 export function prepareDataToInsert(values: CandidatoDTO) {
-  
+  console.log("preparedateToInsert values", values);
+
   values.dataNascimento = formatDateToApi(values.dataNascimento);
   if (values.experiencias) {
     values.experiencias.map((experiencia: ExperienciaDTO) => {
       experiencia.dataInicio = formatDateToApi(experiencia.dataInicio);
       experiencia.dataFim = formatDateToApi(experiencia.dataFim);
+      console.log("experiencias prepareDataToInsert", values.experiencias);
     });
   }
   if (values.dadosEscolares) {
     values.dadosEscolares.map((dadoEscolar: DadosEscolaresDTO) => {
       dadoEscolar.dataInicio = formatDateToApi(dadoEscolar.dataInicio);
       dadoEscolar.dataFim = formatDateToApi(dadoEscolar.dataFim);
+      console.log("dadosescolares prepareDataToInsert", values.dadosEscolares);
     });
   }
 }
@@ -144,5 +147,6 @@ export function prepareDateToUser(values: CandidatoDTO) {
       dadoEscolar.dataFim = formatDateToUser(dadoEscolar.dataFim);
     });
   }
+
   return values;
 }
